@@ -185,6 +185,9 @@ export function MonitorDetail({
       case "30d":
         timeAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
         break;
+      case "90d":
+        timeAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+        break;
       default:
         timeAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
     }
@@ -316,7 +319,7 @@ export function MonitorDetail({
         },
         axisLabel: {
           color: 'rgba(203, 213, 225, 0.6)',
-          rotate: range === '30d' ? 45 : 0,
+          rotate: (range === '30d' || range === '90d') ? 45 : 0,
           fontSize: 10
         }
       },
@@ -594,7 +597,7 @@ export function MonitorDetail({
             },
             axisLabel: {
               color: 'rgba(203, 213, 225, 0.6)',
-              rotate: timeRange === '30d' ? 45 : 0,
+              rotate: (timeRange === '30d' || timeRange === '90d') ? 45 : 0,
               fontSize: 10
             }
           },
@@ -722,7 +725,7 @@ export function MonitorDetail({
             },
             axisLabel: {
               color: 'rgba(203, 213, 225, 0.6)',
-              rotate: timeRange === '30d' ? 45 : 0,
+              rotate: (timeRange === '30d' || timeRange === '90d') ? 45 : 0,
               fontSize: 10
             }
           },
@@ -924,6 +927,7 @@ export function MonitorDetail({
             <option value="24h">最近 24 小时</option>
             <option value="7d">最近 7 天</option>
             <option value="30d">最近 30 天</option>
+            <option value="90d">最近 90 天</option>
           </select>
         </div>
         <div ref={chartRef} className="w-full h-[400px] relative" style={{ zIndex: 1 }}></div>
