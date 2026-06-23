@@ -118,6 +118,12 @@ coolmonitor/
 └── prisma/                 - 数据库模型和迁移
 ```
 
+## 📚 文档
+
+面向开发者与 AI 的完整文档位于 [`docs/`](./docs/README.md)，涵盖快速入门、架构、监控系统、API 参考、数据模型、部署与故障排查等。
+
+入口：[docs/README.md](./docs/README.md)
+
 ## 🌍 贡献指南
 
 欢迎贡献代码！请随时提交Pull Request。
