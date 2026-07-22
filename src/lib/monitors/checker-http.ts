@@ -103,8 +103,8 @@ async function checkHttpSingle(config: MonitorHttpConfig): Promise<MonitorCheckR
     connectTimeout = 10, // 默认10秒超时
     notifyCertExpiry = false,
     monitorId = '',
-    monitorName = ''
-    // ignoreTls 在当前前端实现中未被使用
+    monitorName = '',
+    ignoreTls = false
   } = config;
   
   if (!url) {
@@ -180,8 +180,8 @@ async function checkHttpSingle(config: MonitorHttpConfig): Promise<MonitorCheckR
     let response;
     try {
       response = proxyEnabled ? 
-        await proxyFetch(url, requestOptions) : 
-        await standardFetch(url, requestOptions);
+        await proxyFetch(url, requestOptions, ignoreTls) : 
+        await standardFetch(url, requestOptions, ignoreTls);
     } catch (error) {
       const errorMessage = getNetworkErrorMessage(error);
       const actualTime = Date.now() - startTime;
@@ -292,8 +292,8 @@ async function checkKeywordSingle(config: MonitorKeywordConfig): Promise<Monitor
     maxRedirects = 10, 
     requestBody = '', 
     requestHeaders = '',
-    connectTimeout = 10 // 默认10秒超时
-    // ignoreTls 在当前前端实现中未被使用
+    connectTimeout = 10, // 默认10秒超时
+    ignoreTls = false
   } = config;
   
 
@@ -351,8 +351,8 @@ async function checkKeywordSingle(config: MonitorKeywordConfig): Promise<Monitor
     let response;
     try {
       response = proxyEnabled ? 
-        await proxyFetch(url, requestOptions) : 
-        await standardFetch(url, requestOptions);
+        await proxyFetch(url, requestOptions, ignoreTls) : 
+        await standardFetch(url, requestOptions, ignoreTls);
     } catch (error) {
       // 根据是否启用代理返回不同的错误消息
       const errorMessage = getNetworkErrorMessage(error);

@@ -1,4 +1,4 @@
-import { ProxyAgent, fetch as undiciFetch } from 'undici';
+import { ProxyAgent, Agent, fetch as undiciFetch } from 'undici';
 import { getAllProxySettings, SETTINGS_KEYS } from '../settings';
 
 // 代理配置接口
@@ -162,16 +162,11 @@ export async function standardFetch(
     
     // 如果设置忽略证书错误
     if (ignoreTls) {
-      fetchOptions.dispatcher = {
-        factory: (origin: string) => {
-          return new ProxyAgent({
-            uri: origin,
-            requestTls: {
-              rejectUnauthorized: false
-            }
-          });
+      fetchOptions.dispatcher = new Agent({
+        connect: {
+          rejectUnauthorized: false
         }
-      };
+      });
     }
     
     const response = await undiciFetch(url, fetchOptions as any);
